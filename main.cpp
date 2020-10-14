@@ -1,16 +1,14 @@
-// Project 4
-
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-
 using namespace std;
 
+// Constants
 const int MAX_SPEED = 8;
 const int MAX_PLAYER_HEALTH = 30;
 const int MAX_DL_HEALTH = 50;
 
-///////////// Basic Mechanisms /////////////////
+// ---------- Basic Mechanisms ----------
 
 // Stun: reduce the opponent's speed to 0.
 bool Stun(const int SpeedDif) {
@@ -32,7 +30,7 @@ bool Evade(const int SpeedDif) {
         return false;
 }
 
-////////// Unforgivable Curses ////////////////
+// ---------- Unforgivable Curses ----------
 
 // Avada Kedavra: Cause large health damage (health-10). Can be evaded if the player's speed is higher than the dark lord's speed.
 void AvadaKedavra(int & PlayerHealth, int & PlayerSpeed,
@@ -78,7 +76,7 @@ void Crucio(int & PlayerHealth, int & PlayerSpeed,
     }
 }
 
-////////// Dark Lord Move ////////////////
+// ---------- Dark Lord Move ----------
 
 void DLMove(int & PlayerHealth, int & PlayerSpeed,
     const int DLHealth,
@@ -99,24 +97,32 @@ void DLMove(int & PlayerHealth, int & PlayerSpeed,
     }
 }
 
-////////// Hogwarts Spells ////////////////
+// ---------- Hogwarts Spells ----------
 
 // Expelliarmus (Disarming Spell): Has chance of stun if the player's speed is higher than the opponent's speed.
 void Expelliarmus(const int PlayerHealth,
     const int PlayerSpeed, int & DLHealth, int & DLSpeed) {
     // TODO: Implement the Expelliarmus spell.
+    cout << "You cast Expelliarmus." << endl;
+    int speedDif = PlayerSpeed - DLSpeed;
+    if (Stun(speedDif) == true) {
+        cout << "Dark Lord is stunned." << endl;
+        DLSpeed = 0;
+    } else {
+        cout << "Dark Lord is not affected by your puny attack." << endl;
+    }
 }
 
 // TODO: Implement at least two other spells.
 
-////////// Player Move ////////////////
+// ---------- Player Move ----------
 
 void PlayerMove(const int PlayerHealth,
     const int PlayerSpeed, int & DLHealth, int & DLSpeed) {
     // TODO: Implement the player's move in each round.  
 }
 
-////////// Main Function ////////////////
+// ---------- Main Function ----------
 
 int main() {
     srand(time(NULL));
