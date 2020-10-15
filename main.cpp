@@ -140,8 +140,6 @@ void Expelliarmus(const int PlayerHealth, const int PlayerSpeed, int & DLHealth,
 
 }
 
-// TODO: Implement at least two other spells.
-
 // Scourgify (Damage Spell): Cleans the ground below the opponent, causing them to slip and hit their head
 // Health -15, can be evaded if the Dark Lord's speed is higher than the player's speed
 void Scourgify(const int PlayerHealth, const int PlayerSpeed, int &DLHealth, int &DLSpeed) {
@@ -189,8 +187,6 @@ void Pack(const int PlayerHealth, const int PlayerSpeed, int &DLHeath, int &DLSp
 
 void PlayerMove(const int PlayerHealth, const int PlayerSpeed, int &DLHealth, int &DLSpeed) {
 
-    // TODO: Implement the player's move in each round.
-
     cout << "Choose a spell to cast (1, 2, or 3):" << endl;
     cout << "\t 1. Expelliarmus" << endl;
     cout << "\t 2. Scourgify" << endl;
@@ -202,7 +198,7 @@ void PlayerMove(const int PlayerHealth, const int PlayerSpeed, int &DLHealth, in
     cin >> spellChoice;
 
 
-    if (spellChoice > 1 && spellChoice < 3) {
+    if (spellChoice >= 1 && spellChoice <= 3) {
 
         switch (spellChoice) {
             case 1:
@@ -251,12 +247,43 @@ int main() {
         cout << "Your health is " << PlayerHealth << ", speed is " << PlayerSpeed << ".\n";
         cout << "Dark Lord's health is " << DLHealth << ", speed is " << DLSpeed << ".\n";
 		
-		// TODO: Call PlayerMove and DLMove functions. You need to decide which one moves first.
 		// Remember: The one with higher speed moves first. If they have the same speed, then use a random number to decide.
 		// If one's speed is 0 (i.e., stuned), then you should skip his move.
-		
+
+		if (PlayerSpeed > DLSpeed) {
+
+		    PlayerMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+		    DLMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+
+		} else if (DLSpeed > PlayerSpeed) {
+
+            DLMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+            PlayerMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+
+		} else if (PlayerSpeed == 0) {
+            DLMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+		} else if (DLSpeed == 0) {
+            PlayerMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+		} else if (PlayerSpeed == DLSpeed) {
+
+		    int coinFlip = rand() % 2;
+
+		    if (coinFlip == 0) {
+
+                PlayerMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+                DLMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+
+		    } else {
+
+                PlayerMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+                DLMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+
+            }
+
+		}
 		
 		round++;
+
     }
 
     if (PlayerHealth > 0) {
