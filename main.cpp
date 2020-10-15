@@ -62,9 +62,8 @@ void Imperio(int & PlayerHealth, int & PlayerSpeed,
 
 // Crucio: Cause medium damage and slow the player (health-5, speed-1). The player's speed cannot be reduced to 0 (minimum 1). 
 // Can be evaded if the player's speed is higher than the dark lord's speed.
-void Crucio(int & PlayerHealth, int & PlayerSpeed,
-    const int DLHealth,
-        const int DLSpeed) {
+void Crucio(int &PlayerHealth, int &PlayerSpeed, const int DLHealth, const int DLSpeed) {
+
     cout << "Dark Lord casts Crucio." << endl;
     int SpeedDif = PlayerSpeed - DLSpeed;
     if (Evade(SpeedDif) == false) {
@@ -74,6 +73,7 @@ void Crucio(int & PlayerHealth, int & PlayerSpeed,
     } else {
         cout << "You evaded it." << endl;
     }
+
 }
 
 // ---------- Dark Lord Move ----------
@@ -100,9 +100,8 @@ void DLMove(int & PlayerHealth, int & PlayerSpeed,
 // ---------- Hogwarts Spells ----------
 
 // Expelliarmus (Disarming Spell): Has chance of stun if the player's speed is higher than the opponent's speed.
-void Expelliarmus(const int PlayerHealth,
-    const int PlayerSpeed, int & DLHealth, int & DLSpeed) {
-    // TODO: Implement the Expelliarmus spell.
+void Expelliarmus(const int PlayerHealth, const int PlayerSpeed, int & DLHealth, int & DLSpeed) {
+
     cout << "You cast Expelliarmus." << endl;
     int speedDif = PlayerSpeed - DLSpeed;
     if (Stun(speedDif) == true) {
@@ -111,9 +110,25 @@ void Expelliarmus(const int PlayerHealth,
     } else {
         cout << "Dark Lord is not affected by your puny attack." << endl;
     }
+
 }
 
 // TODO: Implement at least two other spells.
+
+// Scourgify (Damage Spell): Cleans the ground below the opponent, causing them to slip and hit their head
+// Health - 15, can be evaded if the Dark Lord's speed is higher than the player's speed
+void Scourgify(const int PlayerHealth, const int PlayerSpeed, int &DLHealth, int &DLSpeed) {
+
+    cout << "You cast Scourgify with a smirk." << endl;
+    int speedDif = DLSpeed - PlayerSpeed;
+    if (!Evade(speedDif)) {
+        cout << "You got him! Health: -15" << endl;
+        DLHealth -= 15;
+    } else {
+        cout << "He evaded it... c'mon man." << endl;
+    }
+
+}
 
 // ---------- Player Move ----------
 
