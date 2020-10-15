@@ -43,16 +43,16 @@ bool Evade(const int SpeedDif) {
 // Avada Kedavra: Cause large health damage (health-10). Can be evaded if the player's speed is higher than the dark lord's speed.
 void AvadaKedavra(int & PlayerHealth, int & PlayerSpeed, const int DLHealth, const int DLSpeed) {
 
-    cout << "Dark Lord casts Avada Kedavra." << endl;
+    cout << "The Dark Lord casts Avada Kedavra." << endl;
     int SpeedDif = PlayerSpeed - DLSpeed;
 
     if (Evade(SpeedDif) == false) {
 
-        cout << "You are hit. Health-10." << endl;
+        cout << "You've been hit! Health: -10." << endl;
         PlayerHealth -= 10;
 
     } else {
-        cout << "You evaded it." << endl;
+        cout << "You sly dog, you evaded it!" << endl;
     }
 
 }
@@ -60,17 +60,17 @@ void AvadaKedavra(int & PlayerHealth, int & PlayerSpeed, const int DLHealth, con
 // Imperio: Has chance of stun if the dark lord's speed is higher than the player's speed. 
 void Imperio(int & PlayerHealth, int & PlayerSpeed, const int DLHealth, const int DLSpeed) {
 
-    cout << "Dark Lord casts Imperio." << endl;
+    cout << "The Dark Lord casts Imperio." << endl;
 
     int SpeedDif = DLSpeed - PlayerSpeed;
 
     if (Stun(SpeedDif) == true) {
 
-        cout << "You are stunned." << endl;
+        cout << "Seriously? You're stunned now." << endl;
         PlayerSpeed = 0;
 
     } else {
-        cout << "It takes no effect on you." << endl;
+        cout << "Now THAT was pretty pathetic. I thought you were powerful?" << endl;
     }
 
 }
@@ -79,13 +79,13 @@ void Imperio(int & PlayerHealth, int & PlayerSpeed, const int DLHealth, const in
 // Can be evaded if the player's speed is higher than the dark lord's speed.
 void Crucio(int &PlayerHealth, int &PlayerSpeed, const int DLHealth, const int DLSpeed) {
 
-    cout << "Dark Lord casts Crucio." << endl;
+    cout << "The Dark Lord casts Crucio." << endl;
 
     int SpeedDif = PlayerSpeed - DLSpeed;
 
     if (Evade(SpeedDif) == false) {
 
-        cout << "You are hit. Health-5. Speed-1." << endl;
+        cout << "You've been hit! Health: -5. Speed: -1." << endl;
         PlayerHealth -= 5;
 
         if (PlayerSpeed>1) {
@@ -93,7 +93,7 @@ void Crucio(int &PlayerHealth, int &PlayerSpeed, const int DLHealth, const int D
         }
 
     } else {
-        cout << "You evaded it." << endl;
+        cout << "You sly dog, you evaded it!" << endl;
     }
 
 }
@@ -131,11 +131,11 @@ void Expelliarmus(const int PlayerHealth, const int PlayerSpeed, int & DLHealth,
 
     if (Stun(speedDif) == true) {
 
-        cout << "Dark Lord is stunned." << endl;
+        cout << "The Dark Lord has been stunned!" << endl;
         DLSpeed = 0;
 
     } else {
-        cout << "Dark Lord is not affected by your puny attack." << endl;
+        cout << "The Dark Lord is not affected by your puny attack." << endl;
     }
 
 }
@@ -170,7 +170,7 @@ void Pack(const int PlayerHealth, const int PlayerSpeed, int &DLHeath, int &DLSp
 
     if (!Evade(speedDif)) {
 
-        cout << "Ouch! That is going to leave a mark. Health -5. Speed -2." << endl;
+        cout << "Ouch! That is going to leave a mark. Health: -5. Speed: -2." << endl;
         DLHeath -= 5;
 
         if (DLSpeed > 1) {
@@ -178,7 +178,7 @@ void Pack(const int PlayerHealth, const int PlayerSpeed, int &DLHeath, int &DLSp
         }
 
     } else {
-        cout << "How does a big trunk miss? Get it together!" << endl;
+        cout << "How does a trunk THAT big miss? Get it together!" << endl;
     }
 
 }
@@ -196,7 +196,7 @@ void PlayerMove(const int PlayerHealth, const int PlayerSpeed, int &DLHealth, in
 
     int spellChoice;
     cin >> spellChoice;
-
+    cout << endl;
 
     if (spellChoice >= 1 && spellChoice <= 3) {
 
@@ -215,7 +215,7 @@ void PlayerMove(const int PlayerHealth, const int PlayerSpeed, int &DLHealth, in
         }
 
     } else {
-        cout << "Invalid input." << endl;
+        cout << "That wasn't an option man... try again." << endl;
         return PlayerMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
     }
 
@@ -232,12 +232,13 @@ int main() {
     int DLHealth = MAX_DL_HEALTH;
     int DLSpeed = MAX_SPEED;
 
-    cout << "Battle begins!" << endl;
+    cout << "The battle has begun!" << endl;
 	
 	int round = 1;
 
     while ((PlayerHealth > 0) && (DLHealth > 0)) {
 		
+		cout << endl;
 		cout << "---------------Round " << round << "---------------" << endl;
 		
 		// Restore 1 speed at the begining of each round.
@@ -245,7 +246,7 @@ int main() {
         if (DLSpeed<MAX_SPEED) DLSpeed += 1;
 
         cout << "Your health is " << PlayerHealth << ", speed is " << PlayerSpeed << ".\n";
-        cout << "Dark Lord's health is " << DLHealth << ", speed is " << DLSpeed << ".\n";
+        cout << "The Dark Lord's health is " << DLHealth << ", speed is " << DLSpeed << ".\n";
 		
 		// Remember: The one with higher speed moves first. If they have the same speed, then use a random number to decide.
 		// If one's speed is 0 (i.e., stuned), then you should skip his move.
@@ -253,11 +254,13 @@ int main() {
 		if (PlayerSpeed > DLSpeed) {
 
 		    PlayerMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+		    cout << endl;
 		    DLMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
 
 		} else if (DLSpeed > PlayerSpeed) {
 
             	    DLMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+		    cout << endl;
             	    PlayerMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
 
 		} else if (PlayerSpeed == 0) {
@@ -271,11 +274,13 @@ int main() {
 		    if (coinFlip == 0) {
 
                         PlayerMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+		        cout << endl;
                         DLMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
 
 		    } else {
 
                         PlayerMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+		        cout << endl;
                         DLMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
 
                     }
@@ -287,9 +292,9 @@ int main() {
     }
 
     if (PlayerHealth > 0) {
-        cout << "You win!" << endl;
+        cout << "\nYou win!" << endl;
     } else {
-        cout << "Dark lord wins." << endl;
+        cout << "\nThe Dark lord wins." << endl;
     }
 
     return 0;

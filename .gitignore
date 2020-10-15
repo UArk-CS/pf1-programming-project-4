@@ -169,3 +169,5 @@ Temporary Items
 
 # End of https://www.toptal.com/developers/gitignore/api/c++,macos,clion
 
+# Custom 
+*.exe
