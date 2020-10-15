@@ -116,7 +116,7 @@ void Expelliarmus(const int PlayerHealth, const int PlayerSpeed, int & DLHealth,
 // TODO: Implement at least two other spells.
 
 // Scourgify (Damage Spell): Cleans the ground below the opponent, causing them to slip and hit their head
-// Health - 15, can be evaded if the Dark Lord's speed is higher than the player's speed
+// Health -15, can be evaded if the Dark Lord's speed is higher than the player's speed
 void Scourgify(const int PlayerHealth, const int PlayerSpeed, int &DLHealth, int &DLSpeed) {
 
     cout << "You cast Scourgify with a smirk." << endl;
@@ -126,6 +126,32 @@ void Scourgify(const int PlayerHealth, const int PlayerSpeed, int &DLHealth, int
         DLHealth -= 15;
     } else {
         cout << "He evaded it... c'mon man." << endl;
+    }
+
+}
+
+// Pack (Medium Damage & Speed Spell): Packs and drops luggage trunk on opponents head (Health -5, Speed -2)
+// Can be evaded if the Dark Lord's speed is higher than the player's speed
+// Dark Lord's speed cannot be 0 (minimum 1)
+void Pack(const int PlayerHealth, const int PlayerSpeed, int &DLHeath, int &DLSpeed) {
+
+    cout << "You cast Pack! There goes your neat luggage..." << endl;
+
+    int speedDif = DLSpeed - PlayerSpeed;
+
+    if (!Evade(speedDif)) {
+
+        cout << "Ouch! That is going to leave a mark. Health -5. Speed -2." << endl;
+
+        DLHeath -= 5;
+        if (DLSpeed > 1) {
+            DLSpeed -= 2;
+        }
+
+    } else {
+
+        cout << "How does a big trunk miss? Get it together!" << endl;
+
     }
 
 }
