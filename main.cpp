@@ -187,8 +187,42 @@ void Pack(const int PlayerHealth, const int PlayerSpeed, int &DLHeath, int &DLSp
 
 // ---------- Player Move ----------
 
-void PlayerMove(const int PlayerHealth, const int PlayerSpeed, int & DLHealth, int & DLSpeed) {
-    // TODO: Implement the player's move in each round.  
+void PlayerMove(const int PlayerHealth, const int PlayerSpeed, int &DLHealth, int &DLSpeed) {
+
+    // TODO: Implement the player's move in each round.
+
+    cout << "Choose a spell to cast (1, 2, or 3):" << endl;
+    cout << "\t 1. Expelliarmus" << endl;
+    cout << "\t 2. Scourgify" << endl;
+    cout << "\t 3. Pack" << endl;
+
+    cout << "> ";
+
+    int spellChoice;
+    cin >> spellChoice;
+
+
+    if (spellChoice > 1 && spellChoice < 3) {
+
+        switch (spellChoice) {
+            case 1:
+                Expelliarmus(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+                break;
+            case 2:
+                Scourgify(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+                break;
+            case 3:
+                Pack(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+                break;
+            default:
+                break;
+        }
+
+    } else {
+        cout << "Invalid input." << endl;
+        return PlayerMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+    }
+
 }
 
 // ---------- Main Function ----------
