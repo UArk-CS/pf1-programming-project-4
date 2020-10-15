@@ -257,28 +257,28 @@ int main() {
 
 		} else if (DLSpeed > PlayerSpeed) {
 
-            DLMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
-            PlayerMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+            	    DLMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+            	    PlayerMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
 
 		} else if (PlayerSpeed == 0) {
-            DLMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+            	    DLMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
 		} else if (DLSpeed == 0) {
-            PlayerMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+            	    PlayerMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
 		} else if (PlayerSpeed == DLSpeed) {
 
 		    int coinFlip = rand() % 2;
 
 		    if (coinFlip == 0) {
 
-                PlayerMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
-                DLMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+                        PlayerMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+                        DLMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
 
 		    } else {
 
-                PlayerMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
-                DLMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+                        PlayerMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+                        DLMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
 
-            }
+                    }
 
 		}
 		
