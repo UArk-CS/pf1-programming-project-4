@@ -46,7 +46,7 @@ void AvadaKedavra(int & PlayerHealth, int & PlayerSpeed, const int DLHealth, con
     cout << "The Dark Lord casts Avada Kedavra." << endl;
     int SpeedDif = PlayerSpeed - DLSpeed;
 
-    if (Evade(SpeedDif) == false) {
+    if (!Evade(SpeedDif)) {
 
         cout << "You've been hit! Health: -10." << endl;
         PlayerHealth -= 10;
@@ -64,7 +64,7 @@ void Imperio(int & PlayerHealth, int & PlayerSpeed, const int DLHealth, const in
 
     int SpeedDif = DLSpeed - PlayerSpeed;
 
-    if (Stun(SpeedDif) == true) {
+    if (Stun(SpeedDif)) {
 
         cout << "Seriously? You're stunned now." << endl;
         PlayerSpeed = 0;
@@ -83,7 +83,7 @@ void Crucio(int &PlayerHealth, int &PlayerSpeed, const int DLHealth, const int D
 
     int SpeedDif = PlayerSpeed - DLSpeed;
 
-    if (Evade(SpeedDif) == false) {
+    if (!Evade(SpeedDif)) {
 
         cout << "You've been hit! Health: -5. Speed: -1." << endl;
         PlayerHealth -= 5;
@@ -129,7 +129,7 @@ void Expelliarmus(const int PlayerHealth, const int PlayerSpeed, int & DLHealth,
 
     int speedDif = PlayerSpeed - DLSpeed;
 
-    if (Stun(speedDif) == true) {
+    if (Stun(speedDif)) {
 
         cout << "The Dark Lord has been stunned!" << endl;
         DLSpeed = 0;
@@ -255,13 +255,19 @@ int main() {
 
 		    PlayerMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
 		    cout << endl;
-		    DLMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+
+		    if (DLSpeed != 0) {
+                DLMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+            }
 
 		} else if (DLSpeed > PlayerSpeed) {
 
-            	    DLMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+		    DLMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
 		    cout << endl;
-            	    PlayerMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+
+		    if (PlayerSpeed != 0) {
+                PlayerMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
+            }
 
 		} else if (PlayerSpeed == 0) {
             	    DLMove(PlayerHealth, PlayerSpeed, DLHealth, DLSpeed);
